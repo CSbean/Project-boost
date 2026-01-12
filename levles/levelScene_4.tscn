@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://s3xsagvktih3"]
+
+[ext_resource type="Script" uid="uid://bsry6cix2ydyn" path="res://levles/end_pad.gd" id="1_dwox0"]
+[ext_resource type="PackedScene" uid="uid://30hqls1leku4" path="res://Player/player.tscn" id="2_lkvev"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dvln6"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_j8aue"]
+sky_material = SubResource("ProceduralSkyMaterial_dvln6")
+
+[sub_resource type="Environment" id="Environment_1q3gp"]
+background_mode = 2
+sky = SubResource("Sky_j8aue")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngknv"]
+albedo_color = Color(0.64805096, 0.2704251, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pascs"]
+albedo_color = Color(0.94207346, 0.9124233, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvln6"]
+albedo_color = Color(0, 0.10000014, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8aue"]
+albedo_color = Color(0, 0.8326782, 0.03435727, 1)
+
+[node name="Level" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8079899, -0.46869007, 0.35704613, 0, 0.6059884, 0.7954735, -0.5891963, -0.6427346, 0.4896325, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1q3gp")
+
+[node name="Floor" type="CSGBox3D" parent="." groups=["obsticals"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.616, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_ngknv")
+
+[node name="Floor2" type="CSGBox3D" parent="." groups=["obsticals"]]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -5.586046, 2.3522377, 0)
+use_collision = true
+size = Vector3(1, 6.0876617, 3)
+material = SubResource("StandardMaterial3D_pascs")
+
+[node name="Floor3" type="CSGBox3D" parent="." groups=["obsticals"]]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, 1.7905512, 9.874672, -0.017095566)
+use_collision = true
+size = Vector3(1, 17.949814, 3)
+material = SubResource("StandardMaterial3D_pascs")
+
+[node name="Floor4" type="CSGBox3D" parent="." groups=["obsticals"]]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0.25523365, 8.252566, -0.017095566)
+use_collision = true
+size = Vector3(1, 8.891798, 3)
+material = SubResource("StandardMaterial3D_pascs")
+
+[node name="Floor5" type="CSGBox3D" parent="." groups=["obsticals"]]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 5.586, 2.352, 0)
+use_collision = true
+size = Vector3(1, 6.0876617, 3)
+material = SubResource("StandardMaterial3D_pascs")
+
+[node name="StartPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 0)
+use_collision = true
+size = Vector3(2, 0.5, 2)
+material = SubResource("StandardMaterial3D_dvln6")
+
+[node name="EndPad" type="CSGBox3D" parent="." groups=["goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 0)
+use_collision = true
+size = Vector3(2, 0.5, 2)
+material = SubResource("StandardMaterial3D_j8aue")
+script = ExtResource("1_dwox0")
+file_path = "uid://dm2ngh8gedw0t"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9999619, 0.008726535, 0, -0.008726535, 0.9999619, 0, 3, 7.62)
+
+[node name="Player" parent="." instance=ExtResource("2_lkvev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.2794077, 0)

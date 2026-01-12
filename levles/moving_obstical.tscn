@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc55ouqvh3626"]
+
+[ext_resource type="Script" uid="uid://dsw1w1cct2fc4" path="res://levles/moving_obstical.gd" id="1_dykdo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wu21b"]
+albedo_color = Color(1, 0, 0.016666412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dykdo"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nxown"]
+points = PackedVector3Array(1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5)
+
+[node name="MovingObstical" type="AnimatableBody3D" groups=["obsticals"]]
+script = ExtResource("1_dykdo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_wu21b")
+mesh = SubResource("BoxMesh_dykdo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_nxown")

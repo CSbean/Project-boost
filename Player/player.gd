@@ -7,6 +7,9 @@ class_name Player
 @onready var explosion_audio: AudioStreamPlayer = $ExplosionAudio
 @onready var success_audio: AudioStreamPlayer = $SuccessAudio
 @onready var rocket_audio: AudioStreamPlayer3D = $RocketAudio
+@onready var MainBooster: GPUParticles3D = $MainBooster
+@onready var right_booster: GPUParticles3D = $RightBooster
+@onready var left_booster: GPUParticles3D = $LeftBooster
 
 var transitioning := false
 
@@ -20,14 +23,22 @@ func _process(delta: float) -> void:
 	if !transitioning:
 		if Input.is_action_pressed("boost"):
 			apply_central_force(basis.y * delta * thrust)
+			MainBooster.emitting=true
 			if !rocket_audio.is_playing():
 				rocket_audio.play()
 		else:
 			rocket_audio.stop()
+			MainBooster.emitting = false
 		if Input.is_action_pressed("rotate left"):
 			apply_torque(Vector3(0,0,1)* delta * torque_thrust)
+			right_booster.emitting=true
+		else:
+			right_booster.emitting = false
 		if Input.is_action_pressed("rotate right"):
 			apply_torque(Vector3(0,0,1)* -delta * torque_thrust)
+			left_booster.emitting = true
+		else:
+			left_booster.emitting = false
 	if Input.is_action_pressed("reset"):
 		get_tree().reload_current_scene.call_deferred()
 
@@ -47,6 +58,10 @@ func _on_body_entered(body: Node) -> void:
 func crash_sequence()->void:
 	transitioning = true
 	explosion_audio.play()
+	MainBooster.emitting = false
+	right_booster.emitting = false
+	left_booster.emitting = false
+	rocket_audio.stop()
 	print("KABOOM!")
 	await get_tree().create_timer(2.5).timeout
 	get_tree().reload_current_scene.call_deferred()
@@ -54,5 +69,9 @@ func crash_sequence()->void:
 func complete_levle(next_level_file)->void:
 	transitioning = true
 	success_audio.play()
+	rocket_audio.stop()
+	MainBooster.emitting = false
+	right_booster.emitting = false
+	left_booster.emitting = false
 	await get_tree().create_timer(2.5).timeout
 	get_tree().change_scene_to_file.call_deferred(next_level_file)

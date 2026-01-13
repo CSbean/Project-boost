@@ -48,11 +48,11 @@ func crash_sequence()->void:
 	transitioning = true
 	explosion_audio.play()
 	print("KABOOM!")
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(2.5).timeout
 	get_tree().reload_current_scene.call_deferred()
 
 func complete_levle(next_level_file)->void:
 	transitioning = true
 	success_audio.play()
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(2.5).timeout
 	get_tree().change_scene_to_file.call_deferred(next_level_file)

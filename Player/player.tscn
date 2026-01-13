@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://30hqls1leku4"]
+[gd_scene load_steps=10 format=3 uid="uid://30hqls1leku4"]
 
 [ext_resource type="Script" uid="uid://63jufnskv1p5" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="AudioStream" uid="uid://sswvqgc2pxqv" path="res://assets/SFX - Death Explosion.ogg" id="2_4ntmi"]
 [ext_resource type="AudioStream" uid="uid://dxoehsuhf5v1i" path="res://assets/SFX - Success.ogg" id="3_btcbx"]
 [ext_resource type="AudioStream" uid="uid://4688dtwhss2d" path="res://assets/SFX - Main engine thrust.ogg" id="4_gwnis"]
-[ext_resource type="PackedScene" uid="uid://utljkmfy2jgu" path="res://booster_particles.tscn" id="5_k53q1"]
+[ext_resource type="PackedScene" uid="uid://utljkmfy2jgu" path="res://Particals/booster_particles.tscn" id="5_k53q1"]
+[ext_resource type="PackedScene" uid="uid://dcecb8hw7dbrv" path="res://Particals/explosion_particles.tscn" id="6_fhl08"]
+[ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://Particals/success_particles.tscn" id="7_vtle1"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_btcbx"]
 
@@ -46,5 +48,9 @@ emitting = false
 [node name="LeftBooster" parent="." instance=ExtResource("5_k53q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, -1, 0)
 emitting = false
+
+[node name="ExplosionParticles" parent="." instance=ExtResource("6_fhl08")]
+
+[node name="SuccessParticles" parent="." instance=ExtResource("7_vtle1")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

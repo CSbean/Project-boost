@@ -10,6 +10,8 @@ class_name Player
 @onready var MainBooster: GPUParticles3D = $MainBooster
 @onready var right_booster: GPUParticles3D = $RightBooster
 @onready var left_booster: GPUParticles3D = $LeftBooster
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
+@onready var success_particles: GPUParticles3D = $SuccessParticles
 
 var transitioning := false
 
@@ -62,6 +64,7 @@ func crash_sequence()->void:
 	right_booster.emitting = false
 	left_booster.emitting = false
 	rocket_audio.stop()
+	explosion_particles.emitting = true
 	print("KABOOM!")
 	await get_tree().create_timer(2.5).timeout
 	get_tree().reload_current_scene.call_deferred()
@@ -70,6 +73,7 @@ func complete_levle(next_level_file)->void:
 	transitioning = true
 	success_audio.play()
 	rocket_audio.stop()
+	success_particles.emitting = true
 	MainBooster.emitting = false
 	right_booster.emitting = false
 	left_booster.emitting = false

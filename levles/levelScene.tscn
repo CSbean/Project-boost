@@ -1,23 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm2ngh8gedw0t"]
+[gd_scene load_steps=7 format=3 uid="uid://dm2ngh8gedw0t"]
 
 [ext_resource type="Script" uid="uid://bsry6cix2ydyn" path="res://levles/end_pad.gd" id="1_1q3gp"]
 [ext_resource type="PackedScene" uid="uid://30hqls1leku4" path="res://Player/player.tscn" id="1_j8aue"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dvln6"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_j8aue"]
-sky_material = SubResource("ProceduralSkyMaterial_dvln6")
-
-[sub_resource type="Environment" id="Environment_1q3gp"]
-background_mode = 2
-sky = SubResource("Sky_j8aue")
-tonemap_mode = 2
-glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngknv"]
-albedo_color = Color(0.64805096, 0.2704251, 0, 1)
+[ext_resource type="PackedScene" uid="uid://bui8tqposjhda" path="res://levles/floor.tscn" id="1_r83cq"]
+[ext_resource type="PackedScene" uid="uid://b110r3atvxkjk" path="res://levles/ui.tscn" id="4_befg6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvln6"]
 albedo_color = Color(0, 0.10000014, 1, 1)
@@ -27,18 +13,9 @@ albedo_color = Color(0, 0.8326782, 0.03435727, 1)
 
 [node name="Level" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.8079899, -0.46869007, 0.35704613, 0, 0.6059884, 0.7954735, -0.5891963, -0.6427346, 0.4896325, 0, 0, 0)
-shadow_enabled = true
+[node name="UI" parent="." instance=ExtResource("4_befg6")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_1q3gp")
-
-[node name="Floor" type="CSGBox3D" parent="." groups=["obsticals"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.616, -4, 0)
-use_collision = true
-size = Vector3(30, 8, 5)
-material = SubResource("StandardMaterial3D_ngknv")
+[node name="Floor" parent="." instance=ExtResource("1_r83cq")]
 
 [node name="StartPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 0)
@@ -55,7 +32,7 @@ script = ExtResource("1_1q3gp")
 file_path = "uid://dbalbuqsgebte"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999619, 0.008726535, 0, -0.008726535, 0.9999619, 0, 3, 7.62)
+transform = Transform3D(0.9998998, 0.00012351667, -0.014153608, 0, 0.9999619, 0.008726535, 0.014154147, -0.008725661, 0.9998617, 0, 3, 9.451186)
 
 [node name="Player" parent="." instance=ExtResource("1_j8aue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.2794077, 0)

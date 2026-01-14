@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://s3xsagvktih3"]
+[gd_scene load_steps=11 format=3 uid="uid://s3xsagvktih3"]
 
+[ext_resource type="PackedScene" uid="uid://b110r3atvxkjk" path="res://levles/ui.tscn" id="1_1cq8e"]
 [ext_resource type="Script" uid="uid://bsry6cix2ydyn" path="res://levles/end_pad.gd" id="1_dwox0"]
 [ext_resource type="PackedScene" uid="uid://30hqls1leku4" path="res://Player/player.tscn" id="2_lkvev"]
 [ext_resource type="PackedScene" uid="uid://bc55ouqvh3626" path="res://levles/moving_obstical.tscn" id="3_lkvev"]
+[ext_resource type="PackedScene" uid="uid://bui8tqposjhda" path="res://levles/floor.tscn" id="4_5kjps"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dvln6"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,9 +19,6 @@ sky = SubResource("Sky_j8aue")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngknv"]
-albedo_color = Color(0.64805096, 0.2704251, 0, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dvln6"]
 albedo_color = Color(0, 0.10000014, 1, 1)
 
@@ -28,18 +27,14 @@ albedo_color = Color(0, 0.8326782, 0.03435727, 1)
 
 [node name="Level" type="Node3D"]
 
+[node name="UI" parent="." instance=ExtResource("1_1cq8e")]
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.8079899, -0.46869007, 0.35704613, 0, 0.6059884, 0.7954735, -0.5891963, -0.6427346, 0.4896325, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1q3gp")
-
-[node name="Floor" type="CSGBox3D" parent="." groups=["obsticals"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.616, -4, 0)
-use_collision = true
-size = Vector3(30, 8, 5)
-material = SubResource("StandardMaterial3D_ngknv")
 
 [node name="StartPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, 0)
@@ -56,7 +51,7 @@ script = ExtResource("1_dwox0")
 file_path = "uid://dm2ngh8gedw0t"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999619, 0.008726535, 0, -0.008726535, 0.9999619, 0, 3, 7.62)
+transform = Transform3D(1, 0, 0, 0, 0.9999619, 0.008726535, 0, -0.008726535, 0.9999619, 0, 3, 9.451)
 
 [node name="Player" parent="." instance=ExtResource("2_lkvev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.2794077, 0)
@@ -64,3 +59,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.2794077, 0)
 [node name="MovingObstical" parent="." instance=ExtResource("3_lkvev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 destination = Vector3(0, -3.5, 0)
+
+[node name="Floor2" parent="." instance=ExtResource("4_5kjps")]

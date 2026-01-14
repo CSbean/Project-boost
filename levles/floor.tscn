@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://bui8tqposjhda"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngknv"]
+albedo_color = Color(0.25565886, 0.25565878, 0.2556587, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dvln6"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_j8aue"]
+sky_material = SubResource("ProceduralSkyMaterial_dvln6")
+
+[sub_resource type="Environment" id="Environment_1q3gp"]
+background_mode = 2
+background_color = Color(0.9999834, 0.8338647, 0.80660737, 1)
+sky = SubResource("Sky_j8aue")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Floor" type="CSGBox3D" groups=["obsticals"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_ngknv")
+
+[node name="wall" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.49955, 6.006265, 0)
+size = Vector3(1, 15, 5)
+material = SubResource("StandardMaterial3D_ngknv")
+
+[node name="wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.522, 6.006265, 0)
+size = Vector3(1, 15, 5)
+material = SubResource("StandardMaterial3D_ngknv")
+
+[node name="ceiling" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.0098958425, -0.9999512, 0, 0.9999512, -0.0098958425, 0, 0, 0, 1, -0.9861267, 13.730116, 0)
+size = Vector3(1, 48.0166, 5)
+material = SubResource("StandardMaterial3D_ngknv")
+
+[node name="backWall" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.0098958425, -0.9999512, -2.4917724e-11, 0.005026236, -4.974153e-05, 0.99998736, -0.99993855, 0.009895719, 0.0050265044, -0.9861267, 13.730116, -2.8276243)
+size = Vector3(1, 48.0166, 22.580566)
+material = SubResource("StandardMaterial3D_ngknv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1q3gp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9848078, 0.08682409, -0.15038376, 0, 0.8660254, 0.5, 0.1736482, -0.49240386, 0.85286856, -0.616, 4, 20.45968)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.541714, 0)
+omni_range = 19.733
+omni_attenuation = 0.0
